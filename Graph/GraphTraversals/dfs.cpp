@@ -27,7 +27,7 @@ public:
     void dfs(T src){
         map<T, bool> visited;
         
-        for(auto p : visited){
+        for(auto p : l){
             T node = p.first;
             visited[node] = false;
         }
