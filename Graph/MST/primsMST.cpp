@@ -48,10 +48,9 @@ class Graph {
         for (int i = 0; i < V; i++) {
             if (!visited[i]) {
                 topologicalSort(i, visited, Stack);
-        
         }
 
-
+        }
     }
 
     // void topologicalSort() {
