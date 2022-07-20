@@ -14,28 +14,34 @@ typedef long double ld;
 #define f first
 #define s second
 using namespace std;
+
 int main() {
     fast_cin();
-    int n;
-    cin >> n;
-    int arr[n];
-    rep(i, n) { cin >> arr[i]; }
+    int t;
+    cin >> t;
 
-    int dp[n] = {0};
-    dp[0] = 1;
-    int ans = 0;
-    for (int i = 0; i < n; i++) {
-        int m = INT_MIN;
-        for (int j = 0; j < i; j++) {
-            if (arr[j] < arr[i]) {
-                m = max(dp[j], m);
-            }
-        }
-        dp[i] = m + 1;
-
-        ans = max(ans, dp[i]);
+    vector<pair<int, int>> v;
+    rep(i, t) {
+        int n, s;
+        cin >> n >> s;
+        v.push_back({n, s});
     }
 
-    cout << "LIS : " << ans << "\n";
+    sort(v.begin(), v.end());
+
+    int dp[t];
+    int omax = 0;
+    for (int i = 0; i < t; i++) {
+        int max = 0;
+        for (int j = 0; j < i; j++) {
+            if (v[j].second <= v[i].second)
+                if (dp[i] > max) max = dp[j];
+        }
+        dp[i] = max + 1;
+
+        if (dp[i] < omax) omax = dp[i];
+    }
+
+    cout << omax << "\n";
     return 0;
 }

@@ -18,24 +18,17 @@ int main() {
     fast_cin();
     int n;
     cin >> n;
-    int arr[n];
-    rep(i, n) { cin >> arr[i]; }
 
-    int dp[n] = {0};
+    int dp[n + 1];
     dp[0] = 1;
-    int ans = 0;
-    for (int i = 0; i < n; i++) {
-        int m = INT_MIN;
+    dp[1] = 1;
+
+    for (int i = 2; i <= n; i++) {
+        dp[i] = 0;
         for (int j = 0; j < i; j++) {
-            if (arr[j] < arr[i]) {
-                m = max(dp[j], m);
-            }
+            dp[i] += dp[j] * dp[i - j - 1];
         }
-        dp[i] = m + 1;
-
-        ans = max(ans, dp[i]);
     }
-
-    cout << "LIS : " << ans << "\n";
+    cout << dp[n] << '\n';
     return 0;
 }

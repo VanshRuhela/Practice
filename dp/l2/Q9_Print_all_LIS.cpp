@@ -14,6 +14,14 @@ typedef long double ld;
 #define f first
 #define s second
 using namespace std;
+
+struct Pair {
+    int l;
+    int i;
+    int val;
+    string psf;
+};
+
 int main() {
     fast_cin();
     int n;
@@ -22,20 +30,40 @@ int main() {
     rep(i, n) { cin >> arr[i]; }
 
     int dp[n] = {0};
-    dp[0] = 1;
-    int ans = 0;
+    int ans = 0, omi = 0;
+
     for (int i = 0; i < n; i++) {
         int m = INT_MIN;
         for (int j = 0; j < i; j++) {
-            if (arr[j] < arr[i]) {
+            if (arr[j] <= arr[i]) {
                 m = max(dp[j], m);
             }
         }
         dp[i] = m + 1;
-
-        ans = max(ans, dp[i]);
+        if (ans > dp[i]) {
+            ans = max(ans, dp[i]);
+            omi = i;
+        }
     }
 
     cout << "LIS : " << ans << "\n";
+
+    // printing the paths for LIS
+
+    queue<Pair> q;
+    q.push({ans, omi, arr[omi], to_string(arr[omi]) + ""});
+
+    while (q.size() > 0) {
+        Pair rem = q.front();
+        q.pop();
+
+        if (rem.l == 1) cout << rem.psf << endl;
+
+        for (int j = rem.i; j >= 0; j++) {
+            if (dp[j] == rem.i && arr[j] <= rem.val)
+                q.push({dp[j], j, arr[j], to_string(arr[j]) + "->" + rem.psf});
+        }
+    }
+
     return 0;
 }
