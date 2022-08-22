@@ -59,3 +59,26 @@ void Union( a , b){
     parent[s2] = s1;
 }
 Worst Case : O(n) Time , it can also be optimized
+
+
+Optimizations
+-------------
+
+1. Path Compression (Find fn)
+2. Union by Rank (Union Fn)
+
+// 1. Path Compression
+We make the direct parents to the childrens
+int find (int  i){
+    id(parent[i] == -1)
+        return i;
+    return parent[i] = find(parent[i]);
+}
+
+// 2. Union by Rank
+Rank : is the number of child nodes which a node have
+Union by rank : attach the smaller tree with the bigger tree
+i.e. smaller rank tree will be attached to the higher rank parent
+
+By doing both the Optimizations the Time Complexity is almost O(1) (approx.)
+If we only do the path Compression then the Optimization of DSU is O(Log(N)) on average
