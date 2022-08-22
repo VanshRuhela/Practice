@@ -1,0 +1,61 @@
+If we have 4 node say , 1,2,3,4 which each belong to their own set
+
+If we make a array parent with size 4 and initialzed to -1 
+then it shows that it is the parent of its own
+that node itself is the set
+
+Union(1,2) => 2 is made the parent of 1
+Arr : -1 ,"1", -1 , -1
+Nums:  1 , 2 ,  3 , 4
+
+Union (3,4) => 3 is made parent of 4
+Arr : -1 , 1 , -1 , "3"
+Nums:  1 , 2 ,  3 , 4
+
+
+From the current Arr we can say that we have two sets as their are two places where
+we have -1 in the Arr.
+
+Leader / Parent of the Set :> Root of the set which is represted by -1 , we have two leaders : 1 , 3
+
+> Union(1,4)
+Find out the set where ele 1 belongs : s1 ( 1 , 2 ) = set given by Find(1)
+Find out the set where ele 3 belongs : s2 ( 3 , 4 ) = given by Find(3)
+
+if(s1 != s3 ) we can merge them :=> parent of s2 = s3 
+parent[s2] = s1;
+
+Arr : -1 , 1 ,"1", 3
+Nums:  1 , 2 , 3 , 4
+ 
+We would visualze the union/find by a tree , but implement it using the array.
+The array will store the parent of that particualr elem.
+
+Union(2,3) => Makes the graph a cycle
+s1 = find(2) = 1
+s2 = find(3) = 1 
+if both the eme belong to the same set then cycle would be created/present.
+
+Pseudo Code / Time Complexity Analysis :
+
+Union (1,2)
+Union (3,4)
+Union (1,4)
+Union (2,3)
+
+// Return the Parent of the set
+int find (int  i){
+    id(parent[i] == -1)
+        return i;
+    return find(parent[i]);
+}
+Worst Case : O(n) Time , it can be optimized 
+
+void Union( a , b){
+    s1 = find(a); 
+    s2 = find(b);
+
+    if(s1 != s2)
+    parent[s2] = s1;
+}
+Worst Case : O(n) Time , it can also be optimized
