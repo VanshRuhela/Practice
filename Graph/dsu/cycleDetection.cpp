@@ -10,7 +10,7 @@ class Graph {
    public:
     Graph(int V) { this->V = V; }
 
-    int addEdge(int u, int v) { l.push_back(make_pair(u, v)); }
+    void addEdge(int u, int v) { l.push_back(make_pair(u, v)); }
 
     int findSet(int i, int parent[]) {
         if (parent[i] == -1) return i;
@@ -18,7 +18,7 @@ class Graph {
         return findSet(parent[i], parent);
     }
 
-    int unionSet(int x, int y, int parent[]) {
+    void unionSet(int x, int y, int parent[]) {
         int s1 = findSet(x, parent);
         int s2 = findSet(y, parent);
 
@@ -27,6 +27,8 @@ class Graph {
 
     bool contains_cycle() {
         // checking using DSU
+
+        // make everyone as their own parent i.e. -1
         int *parent = new int[V];
         for (int i = 0; i < V; i++) parent[i] = -1;
 
@@ -48,3 +50,17 @@ class Graph {
         return false;
     }
 };
+
+
+int main(){
+    Graph g(5);
+    g.addEdge(0,1);
+    g.addEdge(1,2);
+    g.addEdge(2,3);
+    g.addEdge(3,4);
+    g.addEdge(4,1);
+
+    cout << g.contains_cycle()<< endl;
+
+    return 0;
+}
