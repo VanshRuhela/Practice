@@ -48,6 +48,8 @@ class Graph {
         return false;
     }
 
+    bool bfs()
+
    public:
     Graph(int V) {
         this->V = V;
