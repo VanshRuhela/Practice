@@ -49,6 +49,6 @@ int main() {
     g.addEdge(3, 4);
     g.addEdge(4, 5);
 
-    g.dfs();
+    g.dfs(0);
     return 0;
 }
