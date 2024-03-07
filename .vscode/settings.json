@@ -113,5 +113,6 @@
         "ranges": "cpp",
         "stop_token": "cpp",
         "syncstream": "cpp"
-    }
+    },
+    "C_Cpp.dimInactiveRegions": false
 }
