@@ -69,65 +69,13 @@ Vout(vector) Vout(set) Vout(multiset) Vout2(map)
 // === Debug macro ends here ===
 
 /*=============================================================================
-#  PROBLEM: single source shortest path
-You are given an undirected graph with n nodes (numbered from 1 to n). The graph
-is represented by a list of edges where each edge consists of two nodes x and y,
-indicating that there is an edge between node x and node y.
+#  PROBLEM:           Detect Cycle in a Directed Graph
+Given a directed graph, check whether the graph contains a cycle or not. Your
+function should return true if the given graph contains at least one cycle, else
+return false. Example,
 
-Your task is to implement a function that finds the shortest path from a given
-source node src to all other nodes in the graph. The distance between two
-adjacent nodes is considered as 1. If a node is unreachable from the source
-node, the distance to that node should be represented as INT_MAX
+Input: n = 4, e = 6
+0 -> 1, 0 -> 2, 1 -> 2, 2 -> 0, 2 -> 3, 3 -> 3
+
+Output: Yes
 =============================================================================*/
-template <typename T>
-class Graph {
-    map<T, list<T>> l;
-
-   public:
-    void addEdge(int x, int y) {
-        l[x].push_back(y);
-        l[y].push_back(x);
-    }
-
-    void bfs(T src) {
-        unordered_map<T, int> dist;
-        queue<T> q;
-
-        for (auto node_pair : l) {
-            T node = node_pair.first;
-            dist[node] = INT_MAX;
-        }
-        q.push(src);
-        dist[src] = 0;
-
-        while (!q.empty()) {
-            T curr = q.front();
-            q.pop();
-
-            for (auto x : l[curr]) {
-                if (dist[x] == INT_MAX) {  // unvisited neighbour
-                    q.push(x);
-                    dist[x] = dist[curr] + 1;
-                }
-            }
-        }
-
-        // printing the dist to every node
-
-        for (auto node_pair : l) {
-            T node = node_pair.first;
-            cout << "Node: " << node << " Dist from src " << dist[node] << "\n";
-        }
-    }
-};
-
-int main() {
-    Graph<int> g;
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(0, 3);
-    g.addEdge(1, 2);
-    g.addEdge(2, 3);
-    g.addEdge(3, 4);
-    g.bfs(0);
-}

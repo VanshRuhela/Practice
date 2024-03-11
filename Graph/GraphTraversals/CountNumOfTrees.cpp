@@ -92,8 +92,6 @@ class Graph {
         s.insert(v);
     }
     void dfs(int e) {
-        tr(e);
-        tr(s);
         if (s.find(e) != s.end()) {
             s.erase(e);
             if (l.find(e) != l.end()) {
