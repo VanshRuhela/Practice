@@ -6,10 +6,11 @@ Given an undirected graph, how to check if there is a cycle in the graph?
 Example,
 
 Input: n = 4, e = 4
+0 1, 1 2, 2 3, 0 2
 
 Output: Yes
 
-Explanation:  0 1, 1 2, 2 3, 0 2
+Explanation:  
 
 Algorithm:
 
@@ -47,8 +48,6 @@ class Graph {
 
         return false;
     }
-
-    bool bfs()
 
    public:
     Graph(int V) {

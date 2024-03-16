@@ -91,7 +91,7 @@ struct Graph* createGraph(int V, int E) {
 
 void printArr(int dist[], int n) {
     cout << "Vertex dist from src\n";
-    for (int i = 0; i < n; i++) cout << i << " " << dist[i] <<"\n";
+    for (int i = 0; i < n; i++) cout << i << " " << dist[i] << "\n";
 }
 
 void BellmanFord(struct Graph* graph, int src) {

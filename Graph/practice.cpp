@@ -69,14 +69,15 @@ Vout(vector) Vout(set) Vout(multiset) Vout2(map)
 // === Debug macro ends here ===
 
 /*=============================================================================
-#  PROBLEM:           Detect cycle in an undirected graph
+#  PROBLEM:           Detect Cycle in a Directed Graph
+Given a directed graph, check whether the graph contains a cycle or not. Your
+function should return true if the given graph contains at least one cycle, else
+return false. Example,
 
-Given an undirected graph, how to check if there is a cycle in the graph?
+Input: n = 4, e = 6
+0 -> 1, 0 -> 2, 1 -> 2, 2 -> 0, 2 -> 3, 3 -> 3
+Output: Yes
 
-Example,
-
-Input: n = 4, e = 4
-0 1, 1 2, 2 3, 0 2
 
 Output: Yes
 =============================================================================*/
@@ -86,10 +87,7 @@ vector<bool> vis;
 
 bool cycleDhund(int src, int last) {
     cout << src << " l " << last << "\n";
-    // -1,0v -> 1v, 2v
-    // 1v -> 0v, 2v
-    // 2v -> 0, 1
-    // 1 -- 0 -- 2 ... 1
+    
     if (vis[src] == true and src != last) return true;
     vis[src] = true;
     for (auto x : g[src]) {
@@ -99,18 +97,20 @@ bool cycleDhund(int src, int last) {
     return false;
 }
 
+bool findcycle(int src){
+    
+}
+
 int main() {
     cin >> n >> e;
 
     for (int i = 0; i < e; i++) {
         int a, b;
         cin >> a >> b;
-        g[a].push_back(b);
-        g[b].push_back(a);
+        g[a].push_back(b); // directed graph
     }
 
     vis.resize(n + 1, false);
-    for (auto x : vis) cout << x << " ";
 
-    cycleDhund(1, -1) ? cout << "hai " : cout << "\nnhi h";
+   
 }
